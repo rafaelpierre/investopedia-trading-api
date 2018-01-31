@@ -31,7 +31,6 @@ class Account:
         Logs a user into Investopedia's trading simulator,
         and chooses a competition
         given a *username*, *password*, and *competition_number*
-
         *competition_number* is the position of the desired game
         in the dropdown box on http://www.investopedia.com/simulator/home.aspx
         starting at 0. Default = 0
@@ -215,7 +214,6 @@ class Account:
         for examples on use and inputs. Returns True if the
         trade was successful. Else an exception will be
         raised.
-
         client.trade("GOOG", Action.buy, 10)
         client.trade("GOOG", Action.buy, 10, "Limit", 500)
         """
@@ -259,9 +257,7 @@ class Account:
         Executes option trades on the platform. Returns True if the
         trade was successful. Else an exception will be
         raised.
-
         Expire Date as YYMMDD
-
         client.trade_option("GOOG", Action.buy, "Call", 932.50, 170616, 10)
         client.trade_option("GOOG", Action.buy, "Put", 932.50, 170616, 10, "Limit", 6.25)
         """
@@ -325,6 +321,7 @@ def get_quote(symbol):
     parsed_html = response.soup
     try:
         quote = parsed_html.find('td', attrs={'id': quote_id}).text
+	quote = quote.replace(",", "")
     except:
         return False
     return float(quote)
