@@ -322,6 +322,8 @@ def get_quote(symbol):
     try:
         quote = parsed_html.find('td', attrs={'id': quote_id}).text
         quote = quote.replace(",", "")
+        return float(quote)
     except:
+        print("Unexpected error:", str(sys.exc_info()[0]))
         return False
-    return float(quote)
+    
