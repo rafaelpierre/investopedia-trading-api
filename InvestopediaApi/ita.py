@@ -106,7 +106,7 @@ class Account:
         soup = BeautifulSoup(response.content, "html.parser")
 
         stock_table = soup.find("table", id="stock-portfolio-table").find("tbody")
-        option_table = soup.find("table", id="option-portfolio-table").find("tbody")
+        #option_table = soup.find("table", id="option-portfolio-table").find("tbody")
         short_table = soup.find("table", id="short-portfolio-table").find("tbody")
 
         if stock_table is not None:
@@ -115,11 +115,11 @@ class Account:
         else:
             stock_list = []
 
-        if option_table is not None:
+        '''if option_table is not None:
             option_list = option_table.find_all("tr")[:-1]
             option_list = [o.find_all("td")[-8:-2] for o in option_list]
         else:
-            option_list = []
+            option_list = []'''
 
         if short_table is not None:
             short_list = short_table.find_all("tr")[:-1]
@@ -144,7 +144,7 @@ class Account:
                 )
                 bought.append(sec)
 
-        for option_data in option_list:
+        '''for option_data in option_list:
             option_data_text = [o.getText() for o in option_data]
             if len(option_data_text) == 6:
                 sec = Security(
@@ -155,7 +155,7 @@ class Account:
                     current_price=float(option_data_text[4][1:].replace(",", "")),
                     current_value=float(option_data_text[5][1:].replace(",", ""))
                 )
-                options.append(sec)
+                options.append(sec)'''
 
         for short_data in short_list:
             short_data_text = [s.getText() for s in short_data]
